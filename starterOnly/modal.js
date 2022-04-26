@@ -18,6 +18,7 @@ const email = document.getElementById("email");
 const birth = document.getElementById("birthdate");
 const nbrPart = document.getElementById("quantity");
 const btnSubmit = document.querySelector(".btn-submit");
+const local = document.getElementsByName("location");
 
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
@@ -149,7 +150,11 @@ const validPart = function(inputPart) {
 
 //valider la localisation
 const local1 = document.getElementById('#location1');
-console.log("check", local1);
+const local2 = document.getElementById('#location2');
+const local3 = document.getElementById('#location3');
+const local4 = document.getElementById('#location4');
+const local5 = document.getElementById('#location5');
+const local6 = document.getElementById('#location6');
 // local.addEventListener('change', function() {
 //     validLocation(this);
 // });
@@ -157,7 +162,10 @@ console.log("check", local1);
 //     let smallCheck = document.querySelector("#check-small");
 //     console.log(inputCheck);
 //     console.log(inputCheck.checked);
-//     if (inputCheck.checked = true) {
+//     if (local1.checked) {
+//         smallCheck.innerHTML = 'Localisation valide'
+//         smallCheck.style.color = "green"
+//     } else if (local2.checked) {
 //         smallCheck.innerHTML = 'Localisation valide'
 //         smallCheck.style.color = "green"
 //     } else {
@@ -165,6 +173,21 @@ console.log("check", local1);
 //         smallCheck.style.color = "red"
 //     }
 // };
+for (let check of local) {
+    console.log(check);
+};
+let smallCheck = document.querySelector("#check-small");
+for (let i = 0; i < local.length; i++) {
+    local[i].addEventListener('change', function() {
+        if (local[i].checked == true) {
+            smallCheck.innerHTML = 'Localisation' + local[i].value
+            smallCheck.style.color = "green"
+        } else {
+            smallCheck.innerHTML = 'Vous devez choisir un lieu'
+            smallCheck.style.color = "red"
+        }
+    })
+};
 //vider la modal
 btnSubmit.addEventListener('click', function(event) {
     event.preventDefault();
