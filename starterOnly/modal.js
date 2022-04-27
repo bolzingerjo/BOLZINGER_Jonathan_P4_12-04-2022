@@ -20,6 +20,8 @@ const nbrPart = document.getElementById("quantity");
 const btnSubmit = document.querySelector(".btn-submit");
 const local = document.getElementsByName("location");
 const checkBox1 = document.getElementById("checkbox1");
+const form = document.querySelector("form");
+const modal = document.querySelector('.modal-body')
 
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
@@ -52,9 +54,11 @@ const validEmail = function(inputEmail) {
     if (emailRegex.test(inputEmail.value)) {
         small.innerHTML = 'Adresse valide'
         small.style.color = "green"
+        return true
     } else {
         small.innerHTML = 'Adresse non valide'
         small.style.color = "red"
+        return false
     };
 };
 
@@ -69,9 +73,11 @@ const validPrenom = function(inputPrenom) {
     if (inputPrenom.value.length >= 2) {
         smallPrenom.innerHTML = 'Prénom valide'
         smallPrenom.style.color = "green"
+        return true
     } else {
         smallPrenom.innerHTML = 'le prénom doit contenir au moins 2 lettres'
         smallPrenom.style.color = "red"
+        return false
     }
 };
 
@@ -86,9 +92,11 @@ const validNom = function(inputnom) {
     if (inputnom.value.length >= 2) {
         smallnom.innerHTML = 'Nom valide'
         smallnom.style.color = "green"
+        return true
     } else {
         smallnom.innerHTML = 'Le nom doit contenir au moins 2 lettres'
         smallnom.style.color = "red"
+        return false
     }
 };
 
@@ -103,16 +111,16 @@ const validBirth = function(inputbirth) {
     console.log("now", now.getTime());
     let date100 = now.getTime() - 3155760000000;
     let date16 = now.getTime() - 504921600000;
-    // let date1 = new Date('1922-04-24');
-    // let date2 = new Date('2006-04-24');
 
     console.log("2", inputbirth.valueAsNumber);
     if (inputbirth.valueAsNumber >= date100 && inputbirth.valueAsNumber <= date16) {
         smallbirth.innerHTML = 'Age valide'
         smallbirth.style.color = "green"
+        return true
     } else {
         smallbirth.innerHTML = 'Age entre 16 et 100 ans'
         smallbirth.style.color = "red"
+        return false
     }
 };
 
@@ -127,9 +135,11 @@ const validPart = function(inputPart) {
     if (inputPart.value >= 0 && inputPart.value <= 99) {
         smallPart.innerHTML = 'Nbr participations valide'
         smallPart.style.color = "green"
+        return true
     } else {
         smallPart.innerHTML = 'Le Nbr participations doit être entre 0 et 99'
         smallPart.style.color = "red"
+        return false
     }
 };
 
@@ -143,9 +153,11 @@ for (let i = 0; i < local.length; i++) {
         if (local[i].checked == true) {
             smallCheck.innerHTML = 'Localisation' + local[i].value
             smallCheck.style.color = "green"
+            return true
         } else {
             smallCheck.innerHTML = 'Vous devez choisir un lieu'
             smallCheck.style.color = "red"
+            return false
         }
     })
 };
@@ -161,13 +173,43 @@ const validCheck = function(checkBox) {
     if (checkBox.checked == true) {
         smallPart.innerHTML = 'Case checked '
         smallPart.style.color = "green"
+        return true
     } else {
         smallPart.innerHTML = 'Vous devez cocher la case des CGU'
         smallPart.style.color = "red"
+        return false
     }
 };
 
 //vider la modal
 btnSubmit.addEventListener('click', function(event) {
     event.preventDefault();
+    let errors = 0;
+    if (!validEmail(email)) {
+        errors++;
+    } else if (!validPrenom(prenom)) {
+        errors++;
+    } else if (!validNom(nom)) {
+        errors++;
+    } else if (!validBirth(birth)) {
+        errors++;
+    } else if (!validPart(nbrPart)) {
+        errors++;
+    } else if (!validCheck(checkBox1)) {
+        errors++;
+    }
+    if (errors == 0) {
+        form.innerHTML = "";
+        let p = document.createElement('p');
+        p.classList.add('modal-body')
+        p.innerHTML = "Merci pour votre inscription";
+        let link = document.createElement('a');
+        link.classList.add('btn-submit');
+        link.text = "Fermer";
+        link.addEventListener('click', function() {
+            modalbg.style.display = "none";
+        })
+        modal.append(p);
+        modal.append(link);
+    }
 });
