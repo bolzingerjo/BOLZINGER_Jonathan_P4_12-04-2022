@@ -8,12 +8,12 @@ function editNav() {
 }
 
 // DOM Elements
-const modalbg = document.querySelector(".bground");
+const modalBg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
-const fermer = document.querySelector(".close");
-const prenom = document.getElementById("first");
-const nom = document.getElementById("last");
+const hide = document.querySelector(".close");
+const forName = document.getElementById("first");
+const birthName = document.getElementById("last");
 const email = document.getElementById("email");
 const birth = document.getElementById("birthdate");
 const nbrPart = document.getElementById("quantity");
@@ -28,12 +28,12 @@ modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 
 // launch modal form
 function launchModal() {
-    modalbg.style.display = "block";
+    modalBg.style.display = "block";
 };
 
 // fermer la modal
-fermer.addEventListener('click', function() {
-    modalbg.style.display = "none";
+hide.addEventListener('click', function() {
+    modalBg.style.display = "none";
 });
 
 //Regex email
@@ -43,17 +43,13 @@ email.addEventListener('change', function() {
 // création regex pour validation email
 const validEmail = function(inputEmail) {
     let emailRegex = new RegExp('^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$');
-
     let testEmail = emailRegex.test(inputEmail.value);
-
-    console.log(testEmail);
-    console.log(inputEmail.value);
-
     let small = document.querySelector("#email-small");
-
+    // console.log(testEmail);
+    // console.log(inputEmail.value);
     if (emailRegex.test(inputEmail.value)) {
-        small.innerHTML = 'Adresse valide'
-        small.style.color = "green"
+        // small.innerHTML = 'Adresse valide'
+        // small.style.color = "green"
         return true
     } else {
         small.innerHTML = 'Adresse non valide'
@@ -63,39 +59,39 @@ const validEmail = function(inputEmail) {
 };
 
 //Valider le prénom
-prenom.addEventListener('change', function() {
-    validPrenom(this);
+forName.addEventListener('change', function() {
+    validForName(this);
 });
-const validPrenom = function(inputPrenom) {
-    let smallPrenom = document.querySelector("#prenom-small");
-    console.log(inputPrenom);
-    console.log(inputPrenom.value.length);
-    if (inputPrenom.value.length >= 2) {
-        smallPrenom.innerHTML = 'Prénom valide'
-        smallPrenom.style.color = "green"
+const validForName = function(inputForName) {
+    let smallForName = document.querySelector("#prenom-small");
+    // console.log(inputForName);
+    // console.log(inputForName.value.length);
+    if (inputForName.value.length >= 2) {
+        // smallForName.innerHTML = 'Prénom valide'
+        // smallForName.style.color = "green"
         return true
     } else {
-        smallPrenom.innerHTML = 'le prénom doit contenir au moins 2 lettres'
-        smallPrenom.style.color = "red"
+        smallForName.innerHTML = 'le prénom doit contenir au moins 2 lettres'
+        smallForName.style.color = "red"
         return false
     }
 };
 
 //Valider le nom
-nom.addEventListener('change', function() {
-    validNom(this);
+birthName.addEventListener('change', function() {
+    validBirthName(this);
 });
-const validNom = function(inputnom) {
-    let smallnom = document.querySelector("#nom-small");
-    console.log(inputnom);
-    console.log(inputnom.value.length);
-    if (inputnom.value.length >= 2) {
-        smallnom.innerHTML = 'Nom valide'
-        smallnom.style.color = "green"
+const validBirthName = function(inputBirthName) {
+    let smallBirthName = document.querySelector("#nom-small");
+    // console.log(inputBirthName);
+    // console.log(inputBirthName.value.length);
+    if (inputBirthName.value.length >= 2) {
+        // smallBirthName.innerHTML = 'Nom valide'
+        // smallBirthName.style.color = "green"
         return true
     } else {
-        smallnom.innerHTML = 'Le nom doit contenir au moins 2 lettres'
-        smallnom.style.color = "red"
+        smallBirthName.innerHTML = 'Le nom doit contenir au moins 2 lettres'
+        smallBirthName.style.color = "red"
         return false
     }
 };
@@ -105,21 +101,20 @@ birth.addEventListener('change', function() {
     validBirth(this);
 });
 
-const validBirth = function(inputbirth) {
-    let smallbirth = document.querySelector("#birth-small");
+const validBirth = function(inputBirth) {
+    let smallBirth = document.querySelector("#birth-small");
     const now = new Date();
-    console.log("now", now.getTime());
+    // console.log("now", now.getTime());
     let date100 = now.getTime() - 3155760000000;
     let date16 = now.getTime() - 504921600000;
-
-    console.log("2", inputbirth.valueAsNumber);
-    if (inputbirth.valueAsNumber >= date100 && inputbirth.valueAsNumber <= date16) {
-        smallbirth.innerHTML = 'Age valide'
-        smallbirth.style.color = "green"
+    // console.log("2", inputbirth.valueAsNumber);
+    if (inputBirth.valueAsNumber >= date100 && inputBirth.valueAsNumber <= date16) {
+        // smallBirth.innerHTML = 'Age valide'
+        // smallBirth.style.color = "green"
         return true
     } else {
-        smallbirth.innerHTML = 'Age entre 16 et 100 ans'
-        smallbirth.style.color = "red"
+        smallBirth.innerHTML = 'Age entre 16 et 100 ans'
+        smallBirth.style.color = "red"
         return false
     }
 };
@@ -130,11 +125,14 @@ nbrPart.addEventListener('change', function() {
 });
 const validPart = function(inputPart) {
     let smallPart = document.querySelector("#part-small");
-    console.log(inputPart);
-    console.log(inputPart.value.length);
-    if (inputPart.value >= 0 && inputPart.value <= 99) {
-        smallPart.innerHTML = 'Nbr participations valide'
-        smallPart.style.color = "green"
+    let partRegex = new RegExp('^[0-9]$');
+    let testPart = partRegex.test(inputPart.value);
+    // console.log(inputPart);
+    // console.log(inputPart.value.length);
+    // if (inputPart.value >= 0 && inputPart.value <= 99)
+    if (inputPart.value >= 0 && inputPart.value <= 99 && partRegex.test(inputPart.value)) {
+        // smallPart.innerHTML = 'Nbr participations valide'
+        // smallPart.style.color = "green"
         return true
     } else {
         smallPart.innerHTML = 'Le Nbr participations doit être entre 0 et 99'
@@ -144,15 +142,17 @@ const validPart = function(inputPart) {
 };
 
 //valider la localisation
-for (let check of local) {
-    console.log(check);
-};
+// for (let check of local) {
+//     console.log(check);
+// };
 let smallCheck = document.querySelector("#check-small");
+
 for (let i = 0; i < local.length; i++) {
-    local[i].addEventListener('change', function() {
+    local[i].addEventListener('change', function(localChecked) {
+        // console.log(localChecked)
         if (local[i].checked == true) {
-            smallCheck.innerHTML = 'Localisation' + local[i].value
-            smallCheck.style.color = "green"
+            // smallCheck.innerHTML = 'Localisation' + local[i].value
+            // smallCheck.style.color = "green"
             return true
         } else {
             smallCheck.innerHTML = 'Vous devez choisir un lieu'
@@ -160,23 +160,23 @@ for (let i = 0; i < local.length; i++) {
             return false
         }
     })
-};
 
-//Valider le nbr de participations
+};
+//Valider les CGU
 checkBox1.addEventListener('change', function() {
     validCheck(this);
 });
 const validCheck = function(checkBox) {
-    let smallPart = document.querySelector("#checkbox-small");
-    console.log(checkBox);
-    console.log(checkBox.checked);
+    let smallCheckbox = document.querySelector("#checkbox-small");
+    // console.log(checkBox);
+    // console.log(checkBox.checked);
     if (checkBox.checked == true) {
-        smallPart.innerHTML = 'Case checked '
-        smallPart.style.color = "green"
+        // smallCheckbox.innerHTML = 'Case checked '
+        // smallCheckbox.style.color = "green"
         return true
     } else {
-        smallPart.innerHTML = 'Vous devez cocher la case des CGU'
-        smallPart.style.color = "red"
+        smallCheckbox.innerHTML = 'Vous devez cocher la case des CGU'
+        smallCheckbox.style.color = "red"
         return false
     }
 };
@@ -187,9 +187,9 @@ btnSubmit.addEventListener('click', function(event) {
     let errors = 0;
     if (!validEmail(email)) {
         errors++;
-    } else if (!validPrenom(prenom)) {
+    } else if (!validForName(forName)) {
         errors++;
-    } else if (!validNom(nom)) {
+    } else if (!validBirthName(birthName)) {
         errors++;
     } else if (!validBirth(birth)) {
         errors++;
@@ -197,17 +197,19 @@ btnSubmit.addEventListener('click', function(event) {
         errors++;
     } else if (!validCheck(checkBox1)) {
         errors++;
+        // } else if (!local) {
+        //     errors++;
     }
     if (errors == 0) {
         form.innerHTML = "";
         let p = document.createElement('p');
-        p.classList.add('modal-body')
+        form.classList.add('modal-body');
         p.innerHTML = "Merci pour votre inscription";
         let link = document.createElement('a');
         link.classList.add('btn-submit');
         link.text = "Fermer";
         link.addEventListener('click', function() {
-            modalbg.style.display = "none";
+            modalBg.style.display = "none";
         })
         modal.append(p);
         modal.append(link);
