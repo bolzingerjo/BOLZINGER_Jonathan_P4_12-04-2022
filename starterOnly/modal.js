@@ -203,7 +203,7 @@ btnSubmit.addEventListener('click', function(event) {
     if (errors == 0) {
         form.innerHTML = "";
         let p = document.createElement('p');
-        form.classList.add('modal-body-end');
+        form.classList.add('modal-body');
         p.innerHTML = "Merci pour votre inscription";
         let link = document.createElement('a');
         link.classList.add('btn-submit');
