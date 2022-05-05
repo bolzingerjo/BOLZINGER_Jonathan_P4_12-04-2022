@@ -134,7 +134,6 @@ const validPart = function(inputPart) {
     let testPart = partRegex.test(inputPart.value);
     // console.log(inputPart);
     // console.log(inputPart.value.length);
-    // if (inputPart.value >= 0 && inputPart.value <= 99)
     if (inputPart.value >= 0 && inputPart.value <= 99 && partRegex.test(inputPart.value)) {
         // smallPart.innerHTML = 'Nbr participations valide'
         // smallPart.style.color = "green"
@@ -148,12 +147,8 @@ const validPart = function(inputPart) {
 };
 
 //valider la localisation
-// for (let check of local) {
-//     console.log(check);
-// };
-let smallCheck = document.querySelector("#check-small");
-
 const btnRadio = function() {
+    let smallCheck = document.querySelector("#check-small");
     // voir si un btn radio checked
     for (let i = 0; i < local.length; i++) {
         if (local[i].checked == true) {
